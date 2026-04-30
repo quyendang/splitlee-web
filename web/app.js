@@ -430,7 +430,22 @@
   }
 
   function hasQrImage(base64) {
-    return typeof base64 === 'string' && base64.trim().length > 0;
+    if (typeof base64 !== 'string') return false;
+    const value = base64.trim();
+    if (!value) return false;
+
+    try {
+      const decoded = atob(value.replace(/-/g, '+').replace(/_/g, '/'));
+      if (decoded.length < 8) return false;
+
+      const signature = [137, 80, 78, 71, 13, 10, 26, 10];
+      for (let i = 0; i < signature.length; i += 1) {
+        if (decoded.charCodeAt(i) !== signature[i]) return false;
+      }
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   function parsePayload() {
