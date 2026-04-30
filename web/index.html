@@ -7,22 +7,26 @@
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
+  <nav class="locale-switcher" aria-label="Language switcher">
+    <button type="button" class="locale-chip" data-locale="en">EN</button>
+    <button type="button" class="locale-chip" data-locale="vi">VI</button>
+  </nav>
   <main class="page">
     <section id="landing" class="landing" hidden>
       <div class="landing-shell">
         <p class="app">Splitlee</p>
         <div class="landing-copy-block">
-          <p class="landing-kicker">Split receipts. Keep repayment clear.</p>
-          <h1>Minimal bill splitting for real groups.</h1>
-          <p class="landing-copy">
+          <p id="landing-kicker" class="landing-kicker">Split receipts. Keep repayment clear.</p>
+          <h1 id="landing-title">Minimal bill splitting for real groups.</h1>
+          <p id="landing-copy" class="landing-copy">
             Scan a receipt, add items manually, assign people, and share repayment details in a clean flow that works across regions.
           </p>
         </div>
 
-        <div class="landing-points" aria-label="Key capabilities">
-          <span>Scan or add manually</span>
-          <span>Share payment details</span>
-          <span>No payment processing</span>
+        <div id="landing-points" class="landing-points" aria-label="Key capabilities">
+          <span id="landing-point-1">Scan or add manually</span>
+          <span id="landing-point-2">Share payment details</span>
+          <span id="landing-point-3">No payment processing</span>
         </div>
 
         <a
@@ -53,18 +57,18 @@
         <p id="meta" class="meta"></p>
         <div class="hero-row">
           <div>
-            <p class="eyebrow">Split mode</p>
+            <p id="mode-label" class="eyebrow">Split mode</p>
             <strong id="mode"></strong>
           </div>
           <div class="hero-total">
-            <p class="eyebrow">Total</p>
+            <p id="total-label" class="eyebrow">Total</p>
             <strong id="total"></strong>
           </div>
         </div>
       </header>
 
       <section>
-        <h2 class="section-title">People</h2>
+        <h2 id="people-title" class="section-title">People</h2>
         <ul id="people-list" class="people-list"></ul>
       </section>
 
@@ -74,7 +78,7 @@
       </section>
 
       <section id="payment-section" hidden>
-        <h2 class="section-title">Pay Back</h2>
+        <h2 id="payment-title" class="section-title">Pay Back</h2>
         <div class="payment-card">
           <div class="payment-header-row">
             <div>
@@ -94,7 +98,7 @@
               <dd id="payment-secondary-value"></dd>
             </div>
             <div id="payment-note-row" class="detail-row note-row" hidden>
-              <dt>Note</dt>
+              <dt id="payment-note-label">Note</dt>
               <dd id="payment-note"></dd>
             </div>
           </dl>

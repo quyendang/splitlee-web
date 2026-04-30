@@ -26,6 +26,46 @@ body {
   color: var(--text);
 }
 
+.locale-switcher {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  display: inline-flex;
+  gap: 8px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+}
+
+@media (prefers-color-scheme: dark) {
+  .locale-switcher {
+    background: rgba(26, 27, 31, 0.82);
+  }
+}
+
+.locale-chip {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  min-width: 42px;
+  min-height: 32px;
+  padding: 0 12px;
+  background: transparent;
+  color: var(--sub);
+  font: inherit;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.locale-chip.is-active {
+  background: var(--accent);
+  color: #111111;
+}
+
 .page {
   min-height: 100vh;
   display: grid;
@@ -237,6 +277,11 @@ h1 { margin: 12px 0 6px; font-size: 1.4rem; }
 .error p { margin: 0; color: var(--sub); }
 
 @media (max-width: 560px) {
+  .locale-switcher {
+    top: 12px;
+    right: 12px;
+  }
+
   .page {
     padding: 16px;
   }
