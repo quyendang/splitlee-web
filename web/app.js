@@ -429,6 +429,10 @@
     }
   }
 
+  function hasQrImage(base64) {
+    return typeof base64 === 'string' && base64.trim().length > 0;
+  }
+
   function parsePayload() {
     const fragment = window.location.hash.replace(/^#/, '');
     if (!fragment) return null;
@@ -532,6 +536,9 @@
     }
 
     if (payload.paymentMethod) {
+      qrBlock.hidden = true;
+      paymentQR.removeAttribute('src');
+
       paymentTemplate.textContent = localizedPaymentTemplates()[payload.paymentMethod.template] || payload.paymentMethod.templateName || t('paymentTemplateFallback');
       paymentName.textContent = payload.paymentMethod.displayName || payload.paymentMethod.template || t('details');
       paymentPrimaryLabel.textContent = paymentPrimaryLabelForTemplate(payload.paymentMethod.template) || payload.paymentMethod.primaryLabel || t('details');
@@ -561,8 +568,16 @@
       }
 
       if (payload.paymentMethod.qrImageBase64) {
-        paymentQR.src = `data:image/png;base64,${payload.paymentMethod.qrImageBase64}`;
-        qrBlock.hidden = false;
+        if (hasQrImage(payload.paymentMethod.qrImageBase64)) {
+          paymentQR.onerror = () => {
+            qrBlock.hidden = true;
+            paymentQR.removeAttribute('src');
+          };
+          paymentQR.onload = () => {
+            qrBlock.hidden = false;
+          };
+          paymentQR.src = `data:image/png;base64,${payload.paymentMethod.qrImageBase64.trim()}`;
+        }
       } else {
         qrBlock.hidden = true;
         paymentQR.removeAttribute('src');
