@@ -33,6 +33,72 @@ body {
   padding: 24px;
 }
 
+.landing {
+  width: 100%;
+  max-width: 640px;
+}
+
+.landing-shell {
+  background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.88));
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 28px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.08);
+}
+
+@media (prefers-color-scheme: dark) {
+  .landing-shell {
+    background: linear-gradient(180deg, rgba(26,27,31,.98), rgba(22,23,27,.92));
+  }
+}
+
+.landing-copy-block {
+  margin-top: 18px;
+}
+
+.landing-kicker {
+  margin: 0 0 10px;
+  color: var(--sub);
+  font-size: .82rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.landing h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 7vw, 4rem);
+  line-height: .98;
+  letter-spacing: -0.05em;
+  max-width: 12ch;
+}
+
+.landing-copy {
+  margin: 14px 0 0;
+  max-width: 48ch;
+  color: var(--sub);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.landing-points {
+  margin-top: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.landing-points span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: rgba(255,255,255,.03);
+  font-size: .9rem;
+}
+
 .card {
   width: 100%;
   max-width: 480px;
@@ -147,6 +213,16 @@ h1 { margin: 12px 0 6px; font-size: 1.4rem; }
   text-decoration: none;
 }
 
+.landing-badge-link {
+  margin-top: 24px;
+  justify-content: flex-start;
+}
+
+.error-badge-link {
+  margin-top: 18px;
+  justify-content: flex-start;
+}
+
 .download-badge {
   display: block;
   width: min(220px, 100%);
@@ -192,6 +268,15 @@ h1 { margin: 12px 0 6px; font-size: 1.4rem; }
   }
 
   .download-badge {
-    width: 100%;
+    width: min(220px, 100%);
+  }
+
+  .landing-shell {
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .landing h1 {
+    max-width: 10ch;
   }
 }

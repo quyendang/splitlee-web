@@ -1,4 +1,5 @@
 (() => {
+  const landing = document.getElementById('landing');
   const card = document.getElementById('card');
   const error = document.getElementById('error');
   const errorTitle = document.getElementById('error-title');
@@ -27,10 +28,17 @@
   const paymentQR = document.getElementById('payment-qr');
 
   function showError(title, message) {
+    landing.hidden = true;
     card.hidden = true;
     error.hidden = false;
     errorTitle.textContent = title;
     errorMessage.textContent = message;
+  }
+
+  function showLanding() {
+    landing.hidden = false;
+    card.hidden = true;
+    error.hidden = true;
   }
 
   function base64urlDecode(input) {
@@ -227,7 +235,7 @@
       return;
     }
 
-    showError('No split data found.', 'This Splitlee link has no payload.');
+    showLanding();
   }
 
   init();
