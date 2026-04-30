@@ -62,6 +62,47 @@
       privacy1: 'This link contains only final split summary data.',
       privacy2: 'Splitlee shares payment details only and does not process payments.',
       downloadLabel: 'Download Splitlee',
+      paymentTemplateFallback: 'Payment method',
+      paymentTemplates: {
+        zelle: 'Zelle',
+        venmo: 'Venmo',
+        cashApp: 'Cash App',
+        appleCash: 'Apple Cash',
+        paypal: 'PayPal',
+        revolut: 'Revolut',
+        wero: 'Wero',
+        iban: 'IBAN',
+        bankTransfer: 'Bank transfer',
+        vietQR: 'VietQR',
+        momo: 'MoMo',
+        zaloPay: 'ZaloPay',
+        payNow: 'PayNow',
+        promptPay: 'PromptPay',
+        upi: 'UPI',
+        alipay: 'Alipay',
+        wechatPay: 'WeChat Pay',
+        paymentLink: 'Payment link',
+        customHandle: 'Custom handle'
+      },
+      paymentFields: {
+        phoneOrEmail: 'Phone or email',
+        handle: 'Handle',
+        cashtag: 'Cash tag',
+        usernameOrEmail: 'Username or email',
+        revtagOrPhone: 'Revtag or phone',
+        phoneOrContact: 'Phone or contact',
+        iban: 'IBAN',
+        accountNumber: 'Account number',
+        bankOrQr: 'Bank account or QR ID',
+        phoneOrHandle: 'Phone or handle',
+        phoneOrUen: 'Phone or UEN',
+        phoneOrId: 'Phone or ID',
+        upiId: 'UPI ID',
+        paymentLink: 'Payment link',
+        usernameOrHandle: 'Username or handle',
+        bankName: 'Bank name',
+        accountName: 'Account name'
+      },
       modeEqual: 'Equal split',
       modeProportional: 'Proportional split',
       modeDefault: 'Split summary',
@@ -98,6 +139,47 @@
       privacy1: 'Liên kết này chỉ chứa dữ liệu tổng kết cuối cùng.',
       privacy2: 'Splitlee chỉ chia sẻ thông tin thanh toán và không xử lý thanh toán.',
       downloadLabel: 'Tải Splitlee',
+      paymentTemplateFallback: 'Phương thức thanh toán',
+      paymentTemplates: {
+        zelle: 'Zelle',
+        venmo: 'Venmo',
+        cashApp: 'Cash App',
+        appleCash: 'Apple Cash',
+        paypal: 'PayPal',
+        revolut: 'Revolut',
+        wero: 'Wero',
+        iban: 'IBAN',
+        bankTransfer: 'Chuyển khoản ngân hàng',
+        vietQR: 'VietQR',
+        momo: 'MoMo',
+        zaloPay: 'ZaloPay',
+        payNow: 'PayNow',
+        promptPay: 'PromptPay',
+        upi: 'UPI',
+        alipay: 'Alipay',
+        wechatPay: 'WeChat Pay',
+        paymentLink: 'Liên kết thanh toán',
+        customHandle: 'Định danh tuỳ chỉnh'
+      },
+      paymentFields: {
+        phoneOrEmail: 'Số điện thoại hoặc email',
+        handle: 'Định danh',
+        cashtag: 'Cash tag',
+        usernameOrEmail: 'Tên đăng nhập hoặc email',
+        revtagOrPhone: 'Revtag hoặc số điện thoại',
+        phoneOrContact: 'Số điện thoại hoặc liên hệ',
+        iban: 'IBAN',
+        accountNumber: 'Số tài khoản',
+        bankOrQr: 'Tài khoản ngân hàng hoặc định danh QR',
+        phoneOrHandle: 'Số điện thoại hoặc định danh',
+        phoneOrUen: 'Số điện thoại hoặc UEN',
+        phoneOrId: 'Số điện thoại hoặc ID',
+        upiId: 'UPI ID',
+        paymentLink: 'Liên kết thanh toán',
+        usernameOrHandle: 'Tên đăng nhập hoặc định danh',
+        bankName: 'Tên ngân hàng',
+        accountName: 'Tên tài khoản'
+      },
       modeEqual: 'Chia đều',
       modeProportional: 'Chia theo tỉ lệ',
       modeDefault: 'Tổng kết chia tiền',
@@ -235,6 +317,70 @@
     }
   }
 
+  function localizedPaymentTemplates() {
+    return t('paymentTemplates') || {};
+  }
+
+  function localizedPaymentFields() {
+    return t('paymentFields') || {};
+  }
+
+  function paymentPrimaryLabelForTemplate(template) {
+    const fields = localizedPaymentFields();
+    switch (template) {
+      case 'zelle':
+      case 'appleCash':
+        return fields.phoneOrEmail;
+      case 'venmo':
+        return fields.handle;
+      case 'cashApp':
+        return fields.cashtag;
+      case 'paypal':
+        return fields.usernameOrEmail;
+      case 'revolut':
+        return fields.revtagOrPhone;
+      case 'wero':
+        return fields.phoneOrContact;
+      case 'iban':
+        return fields.iban;
+      case 'bankTransfer':
+        return fields.accountNumber;
+      case 'vietQR':
+        return fields.bankOrQr;
+      case 'momo':
+      case 'zaloPay':
+        return fields.phoneOrHandle;
+      case 'payNow':
+        return fields.phoneOrUen;
+      case 'promptPay':
+        return fields.phoneOrId;
+      case 'upi':
+        return fields.upiId;
+      case 'alipay':
+      case 'wechatPay':
+        return fields.phoneOrId;
+      case 'paymentLink':
+        return fields.paymentLink;
+      case 'customHandle':
+        return fields.usernameOrHandle;
+      default:
+        return null;
+    }
+  }
+
+  function paymentSecondaryLabelForTemplate(template) {
+    const fields = localizedPaymentFields();
+    switch (template) {
+      case 'iban':
+      case 'bankTransfer':
+        return fields.bankName;
+      case 'vietQR':
+        return fields.accountName;
+      default:
+        return null;
+    }
+  }
+
   function parsePayload() {
     const fragment = window.location.hash.replace(/^#/, '');
     if (!fragment) return null;
@@ -338,13 +484,13 @@
     }
 
     if (payload.paymentMethod) {
-      paymentTemplate.textContent = payload.paymentMethod.templateName || payload.paymentMethod.template || '';
+      paymentTemplate.textContent = localizedPaymentTemplates()[payload.paymentMethod.template] || payload.paymentMethod.templateName || t('paymentTemplateFallback');
       paymentName.textContent = payload.paymentMethod.displayName || payload.paymentMethod.template || t('details');
-      paymentPrimaryLabel.textContent = payload.paymentMethod.primaryLabel || t('details');
+      paymentPrimaryLabel.textContent = paymentPrimaryLabelForTemplate(payload.paymentMethod.template) || payload.paymentMethod.primaryLabel || t('details');
       paymentPrimaryValue.textContent = payload.paymentMethod.primaryValue || '';
 
       if (payload.paymentMethod.secondaryLabel && payload.paymentMethod.secondaryValue) {
-        paymentSecondaryLabel.textContent = payload.paymentMethod.secondaryLabel;
+        paymentSecondaryLabel.textContent = paymentSecondaryLabelForTemplate(payload.paymentMethod.template) || payload.paymentMethod.secondaryLabel;
         paymentSecondaryValue.textContent = payload.paymentMethod.secondaryValue;
         paymentSecondaryRow.hidden = false;
       } else {
