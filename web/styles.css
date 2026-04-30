@@ -139,18 +139,23 @@ h1 { margin: 12px 0 6px; font-size: 1.4rem; }
 .privacy { margin: 0; color: var(--sub); font-size: .85rem; }
 .card > section,
 .card > footer { margin-top: 20px; }
-.download-link {
+.download-badge-link {
   margin-top: 14px;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 0 16px;
-  border-radius: 999px;
-  background: var(--accent);
-  color: #111111;
-  font-weight: 700;
   text-decoration: none;
+}
+
+.download-badge {
+  display: block;
+  width: min(220px, 100%);
+}
+
+.download-badge img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 .error h1 { margin: 0 0 8px; }
 .error p { margin: 0; color: var(--sub); }
@@ -186,7 +191,7 @@ h1 { margin: 12px 0 6px; font-size: 1.4rem; }
     width: 100%;
   }
 
-  .download-link {
+  .download-badge {
     width: 100%;
   }
 }
