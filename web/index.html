@@ -91,15 +91,24 @@
           <dl class="payment-details">
             <div class="detail-row">
               <dt id="payment-primary-label"></dt>
-              <dd id="payment-primary-value"></dd>
+              <dd class="detail-value-row">
+                <span id="payment-primary-value"></span>
+                <button type="button" class="copy-button" data-copy-target="payment-primary-value" hidden>Copy</button>
+              </dd>
             </div>
             <div id="payment-secondary-row" class="detail-row" hidden>
               <dt id="payment-secondary-label"></dt>
-              <dd id="payment-secondary-value"></dd>
+              <dd class="detail-value-row">
+                <span id="payment-secondary-value"></span>
+                <button type="button" class="copy-button" data-copy-target="payment-secondary-value" hidden>Copy</button>
+              </dd>
             </div>
             <div id="payment-note-row" class="detail-row note-row" hidden>
               <dt id="payment-note-label">Note</dt>
-              <dd id="payment-note"></dd>
+              <dd class="detail-value-row detail-note-value-row">
+                <span id="payment-note"></span>
+                <button type="button" class="copy-button" data-copy-target="payment-note" hidden>Copy</button>
+              </dd>
             </div>
           </dl>
 

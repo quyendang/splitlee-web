@@ -43,6 +43,8 @@
   const paymentNote = document.getElementById('payment-note');
   const qrBlock = document.getElementById('qr-block');
   const paymentQR = document.getElementById('payment-qr');
+  const copyButtons = Array.from(document.querySelectorAll('.copy-button'));
+  const copyResetTimers = new WeakMap();
 
   const STRINGS = {
     en: {
@@ -62,6 +64,8 @@
       privacy1: 'This link contains only final split summary data.',
       privacy2: 'Splitlee shares payment details only and does not process payments.',
       downloadLabel: 'Download Splitlee',
+      copy: 'Copy',
+      copied: 'Copied',
       paymentTemplateFallback: 'Payment method',
       paymentTemplates: {
         zelle: 'Zelle',
@@ -139,6 +143,8 @@
       privacy1: 'Liên kết này chỉ chứa dữ liệu tổng kết cuối cùng.',
       privacy2: 'Splitlee chỉ chia sẻ thông tin thanh toán và không xử lý thanh toán.',
       downloadLabel: 'Tải Splitlee',
+      copy: 'Copy',
+      copied: 'Copied',
       paymentTemplateFallback: 'Phương thức thanh toán',
       paymentTemplates: {
         zelle: 'Zelle',
@@ -254,6 +260,48 @@
     privacy1.textContent = t('privacy1');
     privacy2.textContent = t('privacy2');
     downloadLabel.textContent = t('downloadLabel');
+    copyButtons.forEach((button) => {
+      if (!button.classList.contains('is-copied')) {
+        button.textContent = t('copy');
+      }
+    });
+  }
+
+  async function copyValue(text, button) {
+    const value = String(text || '').trim();
+    if (!value) return;
+
+    try {
+      await navigator.clipboard.writeText(value);
+    } catch {
+      const temp = document.createElement('textarea');
+      temp.value = value;
+      temp.setAttribute('readonly', '');
+      temp.style.position = 'fixed';
+      temp.style.opacity = '0';
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      temp.remove();
+    }
+
+    button.disabled = true;
+    button.classList.add('is-copied');
+    button.textContent = t('copied');
+
+    const previousTimer = copyResetTimers.get(button);
+    if (previousTimer) {
+      clearTimeout(previousTimer);
+    }
+
+    const timeout = window.setTimeout(() => {
+      button.disabled = false;
+      button.classList.remove('is-copied');
+      button.textContent = t('copy');
+      copyResetTimers.delete(button);
+    }, 1200);
+
+    copyResetTimers.set(button, timeout);
   }
 
   function setLocale(locale) {
@@ -520,6 +568,16 @@
         paymentQR.removeAttribute('src');
       }
 
+      copyButtons.forEach((button) => {
+        const targetId = button.dataset.copyTarget;
+        const target = targetId ? document.getElementById(targetId) : null;
+        const value = target ? target.textContent.trim() : '';
+        button.hidden = !value;
+        button.disabled = false;
+        button.classList.remove('is-copied');
+        button.textContent = t('copy');
+      });
+
       paymentSection.hidden = false;
     } else {
       paymentSection.hidden = true;
@@ -551,6 +609,16 @@
 
   localeButtons.forEach((button) => {
     button.addEventListener('click', () => setLocale(button.dataset.locale));
+  });
+
+  copyButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.dataset.copyTarget;
+      const target = targetId ? document.getElementById(targetId) : null;
+      if (target) {
+        copyValue(target.textContent, button);
+      }
+    });
   });
 
   init();
