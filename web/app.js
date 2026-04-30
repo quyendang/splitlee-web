@@ -18,6 +18,9 @@
   const peopleTitle = document.getElementById('people-title');
   const paymentTitle = document.getElementById('payment-title');
   const paymentNoteLabel = document.getElementById('payment-note-label');
+  const privacy1 = document.getElementById('privacy-1');
+  const privacy2 = document.getElementById('privacy-2');
+  const downloadLabel = document.getElementById('download-label');
   const paymentLink = document.getElementById('payment-link');
 
   const titleEl = document.getElementById('title');
@@ -58,6 +61,7 @@
       details: 'Details',
       privacy1: 'This link contains only final split summary data.',
       privacy2: 'Splitlee shares payment details only and does not process payments.',
+      downloadLabel: 'Download Splitlee',
       modeEqual: 'Equal split',
       modeProportional: 'Proportional split',
       modeDefault: 'Split summary',
@@ -93,6 +97,7 @@
       details: 'Chi tiết',
       privacy1: 'Liên kết này chỉ chứa dữ liệu tổng kết cuối cùng.',
       privacy2: 'Splitlee chỉ chia sẻ thông tin thanh toán và không xử lý thanh toán.',
+      downloadLabel: 'Tải Splitlee',
       modeEqual: 'Chia đều',
       modeProportional: 'Chia theo tỉ lệ',
       modeDefault: 'Tổng kết chia tiền',
@@ -164,6 +169,9 @@
     paymentTitle.textContent = t('payBack');
     paymentLink.textContent = t('openLink');
     paymentNoteLabel.textContent = t('note');
+    privacy1.textContent = t('privacy1');
+    privacy2.textContent = t('privacy2');
+    downloadLabel.textContent = t('downloadLabel');
   }
 
   function setLocale(locale) {
