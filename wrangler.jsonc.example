@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "splitlee-web",
+  "pages_build_output_dir": "./web",
+  "compatibility_date": "2026-04-30",
+  "kv_namespaces": [
+    {
+      "binding": "SHARE_LINKS",
+      "id": "REPLACE_WITH_PRODUCTION_KV_NAMESPACE_ID",
+      "preview_id": "REPLACE_WITH_PREVIEW_KV_NAMESPACE_ID"
+    }
+  ],
+  "vars": {
+    "PUBLIC_SHARE_BASE_URL": "https://splitlee-web.s2ofthewind.workers.dev",
+    "SHARE_TTL_SECONDS": "7776000"
+  }
+}

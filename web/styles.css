@@ -1,0 +1,192 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f2f3f5;
+  --card: #ffffff;
+  --text: #111111;
+  --sub: #5b5b5f;
+  --border: #e7e7ea;
+  --accent: #aefb11;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #111214;
+    --card: #1a1b1f;
+    --text: #f3f3f3;
+    --sub: #adadb4;
+    --border: #2b2c31;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(circle at 10% -10%, rgba(174,251,17,.25), transparent 45%), var(--bg);
+  color: var(--text);
+}
+
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.app {
+  margin: 0;
+  font-weight: 700;
+  color: #2f5d00;
+  display: inline-block;
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+h1 { margin: 12px 0 6px; font-size: 1.4rem; }
+.meta { margin: 0 0 14px; color: var(--sub); }
+.eyebrow { margin: 0 0 4px; font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; color: var(--sub); }
+.hero-row { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0 4px; align-items: end; }
+.hero-total { text-align: right; }
+.hero-total strong, #mode { font-size: 1.05rem; }
+.section-title { margin: 0 0 8px; font-size: .95rem; color: var(--sub); }
+.subcopy { margin: 0; color: var(--sub); }
+.people-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.people-list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 14px; background: rgba(255,255,255,.02); }
+.people-list strong { font-size: 1rem; }
+.payment-card,
+.info-card {
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(255,255,255,.02);
+}
+.payment-header-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+.payment-template {
+  margin: 0 0 4px;
+  color: var(--sub);
+  font-size: .85rem;
+}
+.payment-name {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.payment-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.payment-details {
+  margin: 14px 0 0;
+  display: grid;
+  gap: 10px;
+}
+.detail-row {
+  display: grid;
+  grid-template-columns: minmax(110px, 140px) 1fr;
+  gap: 10px;
+}
+.detail-row dt {
+  color: var(--sub);
+}
+.detail-row dd {
+  margin: 0;
+  word-break: break-word;
+  text-align: right;
+}
+.note-row dd,
+.note-row dt {
+  text-align: left;
+}
+.qr-block {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+.qr-block img {
+  width: min(100%, 240px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 10px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+}
+.privacy { margin: 0; color: var(--sub); font-size: .85rem; }
+.card > section,
+.card > footer { margin-top: 20px; }
+.download-link {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #111111;
+  font-weight: 700;
+  text-decoration: none;
+}
+.error h1 { margin: 0 0 8px; }
+.error p { margin: 0; color: var(--sub); }
+
+@media (max-width: 560px) {
+  .page {
+    padding: 16px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .hero-row,
+  .payment-header-row {
+    flex-direction: column;
+    align-items: start;
+  }
+
+  .hero-total {
+    text-align: left;
+  }
+
+  .detail-row {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-row dd {
+    text-align: left;
+  }
+
+  .payment-link {
+    width: 100%;
+  }
+
+  .download-link {
+    width: 100%;
+  }
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Splitlee Share</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section id="card" class="card" hidden>
+      <header class="card-header">
+        <p class="app">Splitlee</p>
+        <h1 id="title"></h1>
+        <p id="meta" class="meta"></p>
+        <div class="hero-row">
+          <div>
+            <p class="eyebrow">Split mode</p>
+            <strong id="mode"></strong>
+          </div>
+          <div class="hero-total">
+            <p class="eyebrow">Total</p>
+            <strong id="total"></strong>
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <h2 class="section-title">People</h2>
+        <ul id="people-list" class="people-list"></ul>
+      </section>
+
+      <section id="payer-section" hidden>
+        <h2 id="payer-title" class="section-title"></h2>
+        <p id="payer-subtitle" class="subcopy"></p>
+      </section>
+
+      <section id="payment-section" hidden>
+        <h2 class="section-title">Pay Back</h2>
+        <div class="payment-card">
+          <div class="payment-header-row">
+            <div>
+              <p id="payment-template" class="payment-template"></p>
+              <h3 id="payment-name" class="payment-name"></h3>
+            </div>
+            <a id="payment-link" class="payment-link" href="" target="_blank" rel="noreferrer noopener" hidden>Open Link</a>
+          </div>
+
+          <dl class="payment-details">
+            <div class="detail-row">
+              <dt id="payment-primary-label"></dt>
+              <dd id="payment-primary-value"></dd>
+            </div>
+            <div id="payment-secondary-row" class="detail-row" hidden>
+              <dt id="payment-secondary-label"></dt>
+              <dd id="payment-secondary-value"></dd>
+            </div>
+            <div id="payment-note-row" class="detail-row note-row" hidden>
+              <dt>Note</dt>
+              <dd id="payment-note"></dd>
+            </div>
+          </dl>
+
+          <div id="qr-block" class="qr-block" hidden>
+            <img id="payment-qr" alt="Payment QR code" />
+          </div>
+        </div>
+      </section>
+
+      <footer class="info-card">
+        <p class="privacy">This link contains only final split summary data.</p>
+        <p class="privacy">Splitlee shares payment details only and does not process payments.</p>
+        <a
+          class="download-link"
+          href="https://apps.apple.com/us/app/splitlee/id6764629076"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          Download Splitlee on the App Store
+        </a>
+      </footer>
+    </section>
+
+    <section id="error" class="card error" hidden>
+      <h1 id="error-title"></h1>
+      <p id="error-message"></p>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
