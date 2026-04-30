@@ -32,6 +32,7 @@
   const payerTitle = document.getElementById('payer-title');
   const payerSubtitle = document.getElementById('payer-subtitle');
   const paymentSection = document.getElementById('payment-section');
+  const paymentTemplateIcon = document.getElementById('payment-template-icon');
   const paymentTemplate = document.getElementById('payment-template');
   const paymentName = document.getElementById('payment-name');
   const paymentPrimaryLabel = document.getElementById('payment-primary-label');
@@ -45,6 +46,20 @@
   const paymentQR = document.getElementById('payment-qr');
   const copyButtons = Array.from(document.querySelectorAll('.copy-button'));
   const copyResetTimers = new WeakMap();
+  const paymentTemplateIcons = {
+    zelle: '/assets/payments/zelle.png',
+    venmo: '/assets/payments/venmo.png',
+    cashApp: '/assets/payments/cashapp.png',
+    paypal: '/assets/payments/paypal.png',
+    revolut: '/assets/payments/revolut.png',
+    momo: '/assets/payments/momo.png',
+    zalopay: '/assets/payments/zalopay.png',
+    payNow: '/assets/payments/paynow.png',
+    promptPay: '/assets/payments/promptpay.png',
+    upi: '/assets/payments/upi.png',
+    alipay: '/assets/payments/alipay.png',
+    wechatPay: '/assets/payments/wechatpay.png'
+  };
 
   const STRINGS = {
     en: {
@@ -429,6 +444,10 @@
     }
   }
 
+  function paymentIconForTemplate(template) {
+    return paymentTemplateIcons[template] || null;
+  }
+
   function hasQrImage(base64) {
     if (typeof base64 !== 'string') return false;
     const value = base64.trim();
@@ -553,6 +572,20 @@
     if (payload.paymentMethod) {
       qrBlock.hidden = true;
       paymentQR.removeAttribute('src');
+      paymentTemplateIcon.hidden = true;
+      paymentTemplateIcon.removeAttribute('src');
+      paymentTemplateIcon.onerror = null;
+
+      const templateIcon = paymentIconForTemplate(payload.paymentMethod.template);
+      if (templateIcon) {
+        paymentTemplateIcon.onerror = () => {
+          paymentTemplateIcon.hidden = true;
+          paymentTemplateIcon.removeAttribute('src');
+        };
+        paymentTemplateIcon.src = templateIcon;
+        paymentTemplateIcon.alt = localizedPaymentTemplates()[payload.paymentMethod.template] || payload.paymentMethod.templateName || t('paymentTemplateFallback');
+        paymentTemplateIcon.hidden = false;
+      }
 
       paymentTemplate.textContent = localizedPaymentTemplates()[payload.paymentMethod.template] || payload.paymentMethod.templateName || t('paymentTemplateFallback');
       paymentName.textContent = payload.paymentMethod.displayName || payload.paymentMethod.template || t('details');

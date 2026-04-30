@@ -189,6 +189,22 @@ h1 { margin: 12px 0 6px; font-size: 1.4rem; }
   color: var(--sub);
   font-size: .85rem;
 }
+
+.payment-template-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-template-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: transparent;
+  flex: 0 0 auto;
+}
+
 .payment-name {
   margin: 0;
   font-size: 1.1rem;
